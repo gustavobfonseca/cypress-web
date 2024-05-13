@@ -1,0 +1,23 @@
+{
+  "inputs": {
+    "nome": "input[id='wpName1']",
+    "senha": "input[id='wpPassword1']"
+  },
+  "botoes":{
+    "botaoLogin": "button[id='wpLoginAttempt']"
+  },
+  "dados": {
+    "usuario": "Gustav8 Teste",
+    "usuarioIncorreto":"Gustavo incorreto123132",
+    
+    "senhaCorreta": "Testes123@",
+    "senhaIncorreta": "Testeserrado123@"
+  },
+  "mensagens": {
+    "loginIncorreto": "O nome de utilizador ou a palavra-passe inseridos estão incorretos.Tente novamente, por favor."
+  },
+  "divs":{
+    "loginIncorreto":"//*[@id='userloginForm']/form/div[1]/div"
+  }
+  
+}

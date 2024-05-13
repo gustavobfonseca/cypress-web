@@ -1,0 +1,9 @@
+{
+    "inputs": {
+      "barraPesquisa": "input[id='searchInput']"
+    },
+    "dados": {
+      "pExistente": "sociedade esportiva Palmeiras",
+      "pInexistente": "gustavo bueno fonseca"
+    }
+  }

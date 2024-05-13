@@ -1,0 +1,8 @@
+{
+    "inputs":{
+        "menu":"input[id='vector-main-menu-dropdown-checkbox'"
+    },
+    "textos":{
+        "h1":"h1[id='firstHeading'"
+    }
+}

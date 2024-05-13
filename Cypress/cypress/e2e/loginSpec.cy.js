@@ -1,30 +1,42 @@
+import 'cypress-xpath'
+
 describe('Login', () => {
-  it('login correto', () => {
-    var nome = "Gustav8 Teste";
-    cy.visit('https://pt.wikipedia.org/')
-    cy.contains('span', 'Entrar').click()
-    cy.get("input[id='wpName1'").type(nome)
-    cy.get("input[id='wpPassword1'").type("Testes123@")
-    cy.get("button[id='wpLoginAttempt'").click()
-    cy.contains('span', nome)
-    cy.get('span').should('not.contain', 'Entrar');
+  var lJson;
 
-  })
-})
-
-describe('Login incorreto', () => {
-  it('login senha incorreta', () => {
-    var nome = "Gustav8 Teste";
-    cy.visit('https://pt.wikipedia.org/')
-    cy.contains('span', 'Entrar').click()
-    cy.get("input[id='wpName1'").type(nome)
-    cy.get("input[id='wpPassword1'").type("Testeserrado123@")
-    cy.get("button[id='wpLoginAttempt'").click()
+  beforeEach(() => {
+    cy.fixture('login.json').then((data) => {
+      lJson = data;
+    });
     
-    cy.get("input[id='wpName1'")
-    cy.get("input[id='wpPassword1'")
-    cy.contains('div', 'O nome de utilizador ou a palavra-passe inseridos estão incorretos.Tente novamente, por favor.')
+    cy.visit('https://pt.wikipedia.org/')
+    cy.contains('span', 'Entrar').click()
+  })
+
+    it('login correto', () => {
+      cy.get(lJson.inputs.nome).type(lJson.dados.usuario)
+      cy.get(lJson.inputs.senha).type(lJson.dados.senhaCorreta)
+      cy.get(lJson.botoes.botaoLogin).click()
+
+      cy.contains('span', lJson.dados.usuario)
+      cy.get('span').should('not.contain', 'Entrar');
+      
+    })
+
+  it('login senha incorreta', () => {
+    cy.get(lJson.inputs.nome).type(lJson.dados.usuario)
+    cy.get(lJson.inputs.senha).type(lJson.dados.senhaIncorreta)
+    cy.get(lJson.botoes.botaoLogin).click()
+
+    // cy.contains('div',lJson.mensagens.loginIncorreto)
+    cy.xpath(lJson.divs.loginIncorreto)
+  })
+
+  it('login username incorreto', () => {
+    cy.get(lJson.inputs.nome).type(lJson.dados.usuarioIncorreto)
+    cy.get(lJson.inputs.senha).type(lJson.dados.senhaCorreta)
+    cy.get(lJson.botoes.botaoLogin).click()
+
+    // cy.contains('div',lJson.mensagens.loginIncorreto)
+    cy.xpath(lJson.divs.loginIncorreto)
   })
 })
-
-
